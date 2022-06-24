@@ -8,19 +8,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('jokes/random', (req, res) => {
-    request(
-        {
-            url: 'https://joke-api-strict-cors.appspot.com/jokes/random' 
-        },
-        (error, response, body) => {
-            if (error || response.statusCode !== 200) {
-                return res.status(500).json({type: 'error', message: error.message});
-            }
-            res.json(JSON.parse(body));
-        }
-    )
+app.get('/matter', (req, res) => {
+    res.send("Hello Word")
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log('listening on ', {PORT}))
