@@ -4,6 +4,8 @@ import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv"; 
 
+import RestaurantsDAO from "./api/dao/restaurantsDAO.js";
+
 // load in environment variables
 dotenv.config();
 
@@ -24,6 +26,7 @@ MongoClient.connect(
     process.exit(1)
 })
 .then(async client => {
+    await RestaurantsDAO.injectDB(client); // initial reference to collection in DB
     app.listen(port, () => {
         console.log('listening on port', port)
     })
